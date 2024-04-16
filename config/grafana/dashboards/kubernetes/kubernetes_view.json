@@ -173,7 +173,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "count (kube_pod_info{namespace=~\"$namespace\"})",
+              "expr": "count (kube_pod_info{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"})",
               "instant": false,
               "legendFormat": "{{pod}}",
               "range": true,
@@ -239,7 +239,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "time() - kube_namespace_created{namespace=~\"$namespace\"}",
+              "expr": "time() - kube_namespace_created{namespace=~\"$namespace\", cluster_name=\"$cluster_name\"}",
               "instant": false,
               "legendFormat": "{{namespace}}",
               "range": true,
@@ -394,7 +394,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum(kube_pod_container_status_running{namespace=~\"$namespace\"})",
+              "expr": "sum(kube_pod_container_status_running{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"})",
               "hide": false,
               "instant": false,
               "legendFormat": "Running",
@@ -407,7 +407,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum(kube_pod_container_status_terminated{namespace=~\"$namespace\"})",
+              "expr": "sum(kube_pod_container_status_terminated{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"})",
               "hide": false,
               "instant": false,
               "legendFormat": "Terminated",
@@ -420,7 +420,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum(kube_pod_container_status_waiting{namespace=~\"$namespace\"})",
+              "expr": "sum(kube_pod_container_status_waiting{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"})",
               "hide": false,
               "instant": false,
               "legendFormat": "Waiting",
@@ -434,7 +434,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "sum(rate(kube_pod_container_status_restarts_total{namespace=~\"$namespace\"}[$__rate_interval]))",
+              "expr": "sum(rate(kube_pod_container_status_restarts_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))",
               "fullMetaSearch": false,
               "hide": false,
               "includeNullMetadata": true,
@@ -555,7 +555,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (phase) (kube_namespace_status_phase{namespace=~\"$namespace\"})",
+              "expr": "sum by (phase) (kube_namespace_status_phase{namespace=~\"$namespace\", cluster_name=\"$cluster_name\"})",
               "instant": false,
               "legendFormat": "{{phase}}",
               "range": true,
@@ -723,7 +723,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (phase)(kube_pod_status_phase{namespace=~\"$namespace\"})",
+              "expr": "sum by (phase)(kube_pod_status_phase{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"})",
               "instant": false,
               "legendFormat": "{{phase}}",
               "range": true,
@@ -820,7 +820,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "kube_pod_status_phase{namespace=~\"$namespace\", pod=~\"$pod\"}",
+              "expr": "kube_pod_status_phase{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}",
               "instant": false,
               "legendFormat": "{{pod}}-{{phase}}",
               "range": true,
@@ -917,7 +917,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "kube_pod_container_status_running{namespace=~\"$namespace\", pod=~\"$pod\"}",
+              "expr": "kube_pod_container_status_running{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}",
               "instant": false,
               "legendFormat": "{{pod}}/{{container}}-Running",
               "range": true,
@@ -929,7 +929,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "kube_pod_container_status_waiting{namespace=~\"$namespace\", pod=~\"$pod\"}",
+              "expr": "kube_pod_container_status_waiting{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}",
               "hide": false,
               "instant": false,
               "legendFormat": "{{pod}}/{{container}}-Waiting",
@@ -942,7 +942,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "kube_pod_container_status_terminated{namespace=~\"$namespace\", pod=~\"$pod\"}",
+              "expr": "kube_pod_container_status_terminated{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}",
               "hide": false,
               "instant": false,
               "legendFormat": "{{pod}}/{{container}}-Terminated",
@@ -1039,7 +1039,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(kube_pod_container_status_restarts_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(kube_pod_container_status_restarts_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{pod}}/{{container}}",
               "range": true,
@@ -1310,7 +1310,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "kube_persistentvolumeclaim_info{namespace=~\"$namespace\", persistentvolumeclaim=~\"$volume_claim\"}",
+              "expr": "kube_persistentvolumeclaim_info{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", persistentvolumeclaim=~\"$volume_claim\"}",
               "instant": false,
               "legendFormat": "{{persistentvolumeclaim}}",
               "range": true,
@@ -1380,7 +1380,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (phase) (kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\", persistentvolumeclaim=~\"$volume_claim\"})",
+              "expr": "sum by (phase) (kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", persistentvolumeclaim=~\"$volume_claim\"})",
               "instant": false,
               "legendFormat": "{{phase}}",
               "range": true,
@@ -1516,7 +1516,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "kube_persistentvolumeclaim_access_mode{namespace=~\"$namespace\", persistentvolumeclaim=~\"$volume_claim\"}",
+              "expr": "kube_persistentvolumeclaim_access_mode{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", persistentvolumeclaim=~\"$volume_claim\"}",
               "instant": false,
               "legendFormat": "{{persistentvolumeclaim}} {{access_mode}}",
               "range": true,
@@ -1810,7 +1810,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\", persistentvolumeclaim=~\"$volume_claim\"}",
+              "expr": "kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", persistentvolumeclaim=~\"$volume_claim\"}",
               "instant": false,
               "legendFormat": "{{persistentvolumeclaim}}-{{phase}}",
               "range": true,
@@ -1907,7 +1907,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "kube_persistentvolumeclaim_resource_requests_storage_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$volume_claim\"}",
+              "expr": "kube_persistentvolumeclaim_resource_requests_storage_bytes{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", persistentvolumeclaim=~\"$volume_claim\"}",
               "instant": false,
               "legendFormat": "{{persistentvolumeclaim}}",
               "range": true,
@@ -1987,7 +1987,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "time() - container_start_time_seconds{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+              "expr": "time() - container_start_time_seconds{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -2057,7 +2057,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "container_processes{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+              "expr": "container_processes{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -2123,7 +2123,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "container_ulimits_soft{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+              "expr": "container_ulimits_soft{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -2250,7 +2250,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (interface) (rate(container_network_receive_bytes_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval]))",
+              "expr": "sum by (interface) (rate(container_network_receive_bytes_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -2317,7 +2317,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (interface) (rate(container_network_transmit_bytes_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval]))",
+              "expr": "sum by (interface) (rate(container_network_transmit_bytes_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "legendFormat": "{{interface}}",
@@ -2444,7 +2444,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (interface) (rate(container_network_receive_packets_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval]))",
+              "expr": "sum by (interface) (rate(container_network_receive_packets_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -2510,7 +2510,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (interface) (rate(container_network_transmit_packets_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval]))",
+              "expr": "sum by (interface) (rate(container_network_transmit_packets_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "legendFormat": "{{interface}}",
@@ -2578,7 +2578,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (interface) (rate(container_network_receive_packets_dropped_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval]))>0",
+              "expr": "sum by (interface) (rate(container_network_receive_packets_dropped_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))>0",
               "hide": false,
               "instant": false,
               "legendFormat": "{{interface}}",
@@ -2650,7 +2650,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (interface) (rate(container_network_transmit_packets_dropped_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval]))>0",
+              "expr": "sum by (interface) (rate(container_network_transmit_packets_dropped_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))>0",
               "hide": false,
               "instant": false,
               "legendFormat": "{{interface}}",
@@ -2718,7 +2718,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (interface) (rate(container_network_receive_errors_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval]))>0",
+              "expr": "sum by (interface) (rate(container_network_receive_errors_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))>0",
               "hide": false,
               "instant": false,
               "legendFormat": "{{interface}}",
@@ -2786,7 +2786,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by (interface) (rate(container_network_transmit_errors_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval]))>0",
+              "expr": "sum by (interface) (rate(container_network_transmit_errors_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval]))>0",
               "hide": false,
               "instant": false,
               "legendFormat": "{{interface}}",
@@ -2947,7 +2947,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
+              "expr": "rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -3047,7 +3047,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_blkio_device_usage_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
+              "expr": "rate(container_blkio_device_usage_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}-{{operation}}",
               "range": true,
@@ -3147,7 +3147,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_fs_reads_bytes_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
+              "expr": "rate(container_fs_reads_bytes_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -3247,7 +3247,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_fs_reads_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
+              "expr": "rate(container_fs_reads_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -3347,7 +3347,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_fs_writes_bytes_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
+              "expr": "rate(container_fs_writes_bytes_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -3447,7 +3447,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_fs_writes_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
+              "expr": "rate(container_fs_writes_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -3608,7 +3608,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "container_memory_usage_bytes{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+              "expr": "container_memory_usage_bytes{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -3712,7 +3712,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "container_memory_max_usage_bytes{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+              "expr": "container_memory_max_usage_bytes{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -3816,7 +3816,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "container_memory_working_set_bytes{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+              "expr": "container_memory_working_set_bytes{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -3920,7 +3920,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "container_memory_cache{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+              "expr": "container_memory_cache{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -4024,7 +4024,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "container_memory_rss{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+              "expr": "container_memory_rss{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -4127,7 +4127,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_memory_failcnt{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
+              "expr": "rate(container_memory_failcnt{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -4227,7 +4227,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_memory_failures_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\", scope=~\"container\"}[$__rate_interval])",
+              "expr": "rate(container_memory_failures_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\", scope=~\"container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}-{{failure_type}}",
               "range": true,
@@ -4327,7 +4327,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_oom_events_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
+              "expr": "rate(container_oom_events_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\", container=~\"$container\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{container}}",
               "range": true,
@@ -4487,7 +4487,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_network_receive_bytes_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(container_network_receive_bytes_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -4587,7 +4587,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_network_transmit_bytes_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(container_network_transmit_bytes_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -4687,7 +4687,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_network_receive_packets_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(container_network_receive_packets_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -4787,7 +4787,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_network_transmit_packets_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(container_network_transmit_packets_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -4887,7 +4887,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_network_receive_packets_dropped_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(container_network_receive_packets_dropped_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -4987,7 +4987,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_network_transmit_packets_dropped_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(container_network_transmit_packets_dropped_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -5087,7 +5087,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_network_receive_errors_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(container_network_receive_errors_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -5187,7 +5187,7 @@
                 "uid": "${DS_AEROSPIKE_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(container_network_transmit_errors_total{namespace=~\"$namespace\", pod=~\"$pod\"}[$__rate_interval])",
+              "expr": "rate(container_network_transmit_errors_total{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"}[$__rate_interval])",
               "instant": false,
               "legendFormat": "{{interface}}",
               "range": true,
@@ -5236,6 +5236,25 @@
       },
       {
         "current": {},
+        "definition": "label_values(kube_namespace_created,cluster_name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "K8S Cluster",
+        "multi": false,
+        "name": "cluster_name",
+        "options": [],
+        "query": {
+          "query": "label_values(kube_namespace_created,cluster_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_AEROSPIKE_PROMETHEUS}"
@@ -5264,7 +5283,7 @@
           "type": "prometheus",
           "uid": "${DS_AEROSPIKE_PROMETHEUS}"
         },
-        "definition": "label_values({__name__=~\"up\", job=~\"$job_name\"},namespace)",
+        "definition": "label_values(kube_namespace_created{cluster_name=\"$cluster_name\"},namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "K8S Namespace",
@@ -5273,7 +5292,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({__name__=~\"up\", job=~\"$job_name\"},namespace)",
+          "query": "label_values(kube_namespace_created{cluster_name=\"$cluster_name\"},namespace)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -5288,7 +5307,7 @@
           "type": "prometheus",
           "uid": "${DS_AEROSPIKE_PROMETHEUS}"
         },
-        "definition": "label_values({__name__=~\"container.*\", namespace=~\"$namespace\"},pod)",
+        "definition": "label_values({__name__=~\"container.*\", namespace=~\"$namespace\", cluster_name=\"$cluster_name\"},pod)",
         "hide": 0,
         "includeAll": true,
         "label": "K8S Pod",
@@ -5297,7 +5316,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({__name__=~\"container.*\", namespace=~\"$namespace\"},pod)",
+          "query": "label_values({__name__=~\"container.*\", namespace=~\"$namespace\", cluster_name=\"$cluster_name\"},pod)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -5312,7 +5331,7 @@
           "type": "prometheus",
           "uid": "${DS_AEROSPIKE_PROMETHEUS}"
         },
-        "definition": "label_values({__name__=~\"container.*\", namespace=~\"$namespace\"},container)",
+        "definition": "label_values({__name__=~\"container.*\", namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"},container)",
         "hide": 0,
         "includeAll": true,
         "label": "K8S Container",
@@ -5321,7 +5340,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({__name__=~\"container.*\", namespace=~\"$namespace\"},container)",
+          "query": "label_values({__name__=~\"container.*\", namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"},container)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -5336,7 +5355,7 @@
           "type": "prometheus",
           "uid": "${DS_AEROSPIKE_PROMETHEUS}"
         },
-        "definition": "label_values(kube_persistentvolumeclaim_info{namespace=~\"$namespace\"},persistentvolumeclaim)",
+        "definition": "label_values(kube_pod_spec_volumes_persistentvolumeclaims_info{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"},persistentvolumeclaim)",
         "hide": 0,
         "includeAll": true,
         "label": "Peristent Volume Claim",
@@ -5345,7 +5364,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(kube_persistentvolumeclaim_info{namespace=~\"$namespace\"},persistentvolumeclaim)",
+          "query": "label_values(kube_pod_spec_volumes_persistentvolumeclaims_info{namespace=~\"$namespace\", cluster_name=\"$cluster_name\", pod=~\"$pod\"},persistentvolumeclaim)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -5360,7 +5379,7 @@
           "type": "prometheus",
           "uid": "${DS_AEROSPIKE_PROMETHEUS}"
         },
-        "definition": "label_values(kube_persistentvolume_info,persistentvolume)",
+        "definition": "label_values(kube_persistentvolumeclaim_info{persistentvolumeclaim=~\"$volume_claim.*\", cluster_name=\"$cluster_name\", namespace=\"$namespace\"}, volumename)",
         "hide": 0,
         "includeAll": true,
         "label": "Persistent Volume",
@@ -5369,7 +5388,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(kube_persistentvolume_info,persistentvolume)",
+          "query": "label_values(kube_persistentvolumeclaim_info{persistentvolumeclaim=~\"$volume_claim.*\", cluster_name=\"$cluster_name\", namespace=\"$namespace\"}, volumename)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
